@@ -7,8 +7,6 @@ from django.contrib.auth import login,logout,authenticate
 from django.contrib import messages
 from django.shortcuts import render, redirect
 
-
-
 def detail(request):
     if request.user.is_authenticated:
         customer = request.user
@@ -32,7 +30,6 @@ def search_feature(request):
         search_query = request.POST['search_query']
         posts = Car.objects.filter(nameCar__contains=search_query)
        
-
     if request.user.is_authenticated:
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer)

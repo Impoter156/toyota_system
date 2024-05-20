@@ -134,9 +134,6 @@ class CustomerAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
   list_display = ("name",)
 
-class ProductAdmin(admin.ModelAdmin):
-  list_display = ("name", "price", "quantity", "provider")
-
 class OderAdmin(admin.ModelAdmin):
   list_display = ('customer', 'order_date',)
 
@@ -151,11 +148,11 @@ class OrderAdmin(admin.ModelAdmin):
     inlines = [OrderDetailInline]
     actions = [download_pdf]
 
-admin.site.register(Category,CategoryAdmin)
-admin.site.register(Product,ProductAdmin)
-admin.site.register(Order, OrderAdmin)
+class StaffManager(admin.ModelAdmin):
+  list_display = ('name', 'phone_number', 'position', 'working_days', 'day_off', 'countSalary')
 
-admin.site.register(ShippingAddress)
+admin.site.register(Category,CategoryAdmin)
+admin.site.register(Order, OrderAdmin)
 admin.site.register(Car,CarAdmin)
 admin.site.register(Customer,CustomerAdmin)
-
+admin.site.register(Staff,StaffManager)

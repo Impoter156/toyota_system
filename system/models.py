@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import AbstractUser,User
 from django.utils import timezone
+from django.contrib import admin
 
 class Category(models.Model):
     sub_category = models.ForeignKey('self',on_delete=models.CASCADE,related_name='sub_categories', null=True,blank=True)
@@ -12,8 +13,6 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-
-# add
 class Car(models.Model):
     id = models.AutoField(primary_key=True)
     nameCar = models.CharField(max_length=255,default='')
@@ -45,28 +44,21 @@ class Customer(User):
     def __str__(self):
         return str(self.id)
 
-# end
-
-class Product(models.Model):
-    id = models.AutoField(primary_key=True)
+class Staff(models.Model):
+    position_choices = {
+        'Sell' : 'Sell',
+        'Manager' : 'Manager',
+        'Accountant' : 'Accountant',
+        'Team-Leader' : 'Team-Leader' 
+    }
     name = models.CharField(max_length=255, default='', blank=True, null=True)
-    price = models.FloatField(default=0)
-    quantity = models.IntegerField(default=0)
-    image = models.ImageField(null=True, blank=True)  # upload_to='static/homepage/images/')
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    provider = models.CharField(max_length=255, blank=True, null=True)
-    description = models.TextField(blank=True,null=True)
-
-    @property
-    def ImageURL(self):
-        try:
-            url = self.image.url
-        except:
-            url = ''
-        return url
-
-    def __str__(self):
-        return self.name
+    phone_number = models.IntegerField(default=0)
+    position = models.CharField(max_length=255, choices=position_choices, default='')
+    working_days = models.IntegerField(default=0, blank=True, null=True)
+    day_off = models.IntegerField(default=0, blank=True, null=True)
+    @admin.display(description='Salary')
+    def countSalary(self):
+        return ((self.working_days * 500000) - (self.day_off * 500000))
 
 class Order(models.Model):
     id = models.AutoField(primary_key=True)
@@ -103,14 +95,3 @@ class OrderDetail(models.Model):
     def get_total(self):
         total = self.car.price * self.quantity
         return total
-
-class ShippingAddress(models.Model):
-    id = models.AutoField(primary_key=True)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    customer = models.ForeignKey(User, on_delete=models.CASCADE)
-    address = models.CharField(max_length=255,null=True)
-    state = models.CharField(max_length=255,null=True)
-    date_add = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.address
