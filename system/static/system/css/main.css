@@ -2,14 +2,20 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	scrollbar-width: none;
 }
 
 body {
 	background-color: hsl(0, 0%, 98%);
 }
 
+.margin-top33 {
+	margin-top: 20%;
+}
+
 .content-section {
-	height: 800px;
+	height: 1500px;
+	display: inline-block;
 }
 
 .align-center {

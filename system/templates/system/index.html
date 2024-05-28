@@ -18,7 +18,7 @@
                     class="btn btn-outline-secondary add-btn update-cart">Add
                     Cart</button>
                 <a class="btn btn-outline-success" href="{% url 'detail'%}?id={{item.id}}">View</a>
-                <h4 style="display: inline-block; float: right"><strong>${{item.price | floatformat:2}}</strong></h4>
+                <h4 style="display: inline-block; float: right"><strong>VNĐ {{item.price | floatformat:2}}</strong></h4>
             </div>
         </div>
         {% endfor %}

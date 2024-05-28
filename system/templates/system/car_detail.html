@@ -1,16 +1,16 @@
 {% extends "system/base.html" %}
 {% block content%}
 {% for item in car %}
-<div class="content-section align-center">
-    <div class="container margin-top mb-5 full-width">
-        <div class="row d-flex justify-content-center ">
+<div class="content-section align-center full-width">
+    <div class="container margin-top mb-5 ">
+        <div class="row d-flex justify-content-center margin-top">
             <div class="col-md-10">
                 <div class="card">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="images p-3">
-                                <div class="text-center p-4"> <img id="main-image" src="{{item.ImageURL}}"
-                                        width="250" />
+                                <div class="text-center p-4"> <img id="main-image" class="margin-top33"
+                                        src="{{item.ImageURL}}" width="250" />
                                 </div>
 
                             </div>
@@ -22,13 +22,13 @@
                                             class="ml-1"><a href="{% url 'index' %}">Back</a> </span> </div> <i
                                         class="fa fa-shopping-cart text-muted"></i>
                                 </div>
-                                <div class="mt-4 mb-3"> <span class="text-uppercase text-muted brand">Orianz</span>
+                                <div class="mt-4 mb-3"> <span class="text-uppercase text-muted brand"></span>
                                     <h5 class="text-uppercase">{{item.nameCar}}</h5>
                                     <div class="price d-flex flex-row align-items-center"> <span
                                             class="act-price">{{item.price}}</span>
                                     </div>
                                 </div>
-                                <p class="about">{{item.description}}</p>
+                                <p class="about">{{item.descriptions}}</p>
                                 <div class="cart mt-4 align-items-center">
                                     <button data-product={{item.id}} data-action="add"
                                         class="btn btn-outline-secondary add-btn update-cart" add-btn update-cart>Add to

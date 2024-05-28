@@ -68,7 +68,6 @@ class Order(models.Model):
     status = models.BooleanField(default=False,null=True)
     transaction_id = models.CharField(max_length=255,null=True)
 
-
     def __str__(self):
         return str(self.id)
 
@@ -89,9 +88,18 @@ class OrderDetail(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     car = models.ForeignKey(Car, on_delete=models.CASCADE,null=True,blank=True )
     quantity = models.IntegerField(default=0,null=True,blank=True)
-    order_add = models.CharField(max_length=255)
+    # order_add = models.DateTimeField(auto_now_add=timezone.now(), editable=True)
+    order_add = models.DateTimeField(editable=True, blank=True)
 
-    @property
+    def save(self, *args, **kwargs):
+        if not self.order_add:
+            self.order_add = timezone.now()
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return str(self.id)
+
+    @property   
     def get_total(self):
         total = self.car.price * self.quantity
         return total

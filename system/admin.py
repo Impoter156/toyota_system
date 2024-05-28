@@ -139,7 +139,7 @@ class OderAdmin(admin.ModelAdmin):
 
 class OrderDetailInline(admin.TabularInline):
     model = OrderDetail
-    fields = ['car', 'quantity', 'order_add']
+    fields = ['car', 'quantity', 'order_add',]
     extra = 1
     
 

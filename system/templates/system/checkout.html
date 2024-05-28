@@ -1,7 +1,7 @@
 {% extends 'system/base.html' %}
 {% load static %}
 {% block content_checkout %}
-<div class="row" style="width: 100%">
+<div class="row margin-top align-center full-width" style="width: 100%">
 	<div class="col-lg-6">
 		<div class="box-element" id="form-wrapper">
 			<form id="form">
@@ -52,20 +52,21 @@
 			<hr>
 			{% for item in items %}
 			<div class="cart-row">
-				<div style="flex:2"><img class="row-image" src="{{item.product.ImageURL}}"></div>
+				<div style="flex:2"><img class="row-image" src="{{item.car.ImageURL}}"></div>
 				<div style="flex:2">
-					<p>{{item.product.name}}</p>
+					<p>{{item.car.nameCar}}</p>
 				</div>
 				<div style="flex:1">
-					<p>{{item.product.price}}</p>
+					<p>{{item.car.price}}</p>
 				</div>
+				<div style="flex:1"></div>
 				<div style="flex:1">
 					<p>{{item.quantity}}</p>
 				</div>
 			</div>
 			{%endfor%}
 			<h5>Items: {{order.get_cart_items}}</h5>
-			<h5>Total: ${{order.get_cart_total}}</h5>
+			<h5>Total: VNĐ {{order.get_cart_total}}</h5>
 		</div>
 	</div>
 </div>
