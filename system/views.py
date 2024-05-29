@@ -177,9 +177,14 @@ def updateItem(request):
     order, created = Order.objects.get_or_create(customer=customer)
     orderItem, created = OrderDetail.objects.get_or_create(order=order, car=car)
     if action == 'add':
-        orderItem.quantity +=1
+        if car.quantity > 0:
+            orderItem.quantity +=1
+            car.quantity -=1
+            car.save()
     elif action == 'remove':
         orderItem.quantity -=1
+        car.quantity +=1
+        car.save()
     orderItem.save()
     if orderItem.quantity <=0:
         orderItem.delete()
