@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.http import HttpResponse
 from django.urls import path
+from django.contrib.auth.models import User
 from .models import *
 
 # excel
